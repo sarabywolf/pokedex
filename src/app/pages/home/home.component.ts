@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   public pokemons: Pokemon[]= [];
+  public colors: [] = []
   private _offset: number = 0;
   private _limit: number = 200;
 
@@ -22,6 +23,7 @@ export class HomeComponent {
 
   async ngOnInit() {
     await this.getPokemonByid();
+    this.getColorType();
   }
 
   async getPokemonByid(){
@@ -39,6 +41,10 @@ export class HomeComponent {
   }
 
   public async getColorType(){
-    
+    this.apiService.getColorByType().subscribe(res => {
+      this.colors = res;
+      console.log(this.colors);
+    })
   }
+
 }

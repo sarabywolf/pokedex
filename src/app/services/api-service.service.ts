@@ -16,7 +16,7 @@ export class ApiServiceService {
   }
 
   public getColorByType() {
-    return this.httpClient.get<any>('assets/types-colors.json');
+    return this.httpClient.get<any>('../../assets/json/color.json');
   }
 
 }

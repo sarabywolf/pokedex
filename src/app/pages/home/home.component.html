@@ -11,7 +11,7 @@
           <h5 class="card-title">{{item.name}}</h5>
           <div class="card-type">
             @for (item2 of item.type; track $index) {
-              <h5 class="card-text">{{item2.type.name}}</h5>
+              <h5 class="card-text" [ngStyle]="{ 'background-color': colors[item2.type.name] }">{{item2.type.name}}</h5>
             }
           </div>
         </div>
