@@ -1,0 +1,37 @@
+.container-nav{
+  background: #4e51fa;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .image{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20%;
+    img{
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .container-search{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    input{
+      min-width: 200px;
+      width: 50%;
+      height: 70%;
+      padding: 10px;
+      border-radius: 1vh;
+      border: none;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+}
