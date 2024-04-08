@@ -1,17 +1,22 @@
 <app-nav-bar></app-nav-bar>
 <div class="container-all">
   <div class="container-cards">
-    @for (item of pokemons; track $index) {
-      <div class="card" style="width: 18rem;">
+    @for (item of filteredPokemons; track $index) {
+      <div class="card" style="width: 18rem">
         <div class="image">
-          <img class="card-img-top" [src]="item.image" alt="Card image cap">
+          <img class="card-img-top" [src]="item.image" alt="Card image cap" />
         </div>
         <div class="card-body">
-          <h5 class="card-title card-id">#{{item.id| number:'3.0-5'}}</h5>
-          <h5 class="card-title">{{item.name}}</h5>
+          <h5 class="card-title card-id">#{{ item.id | number: "3.0-5" }}</h5>
+          <h5 class="card-title">{{ item.name }}</h5>
           <div class="card-type">
             @for (item2 of item.type; track $index) {
-              <h5 class="card-text" [ngStyle]="{ 'background-color': colors[item2.type.name] }">{{item2.type.name}}</h5>
+              <h5
+                class="card-text"
+                [ngStyle]="{ 'background-color': colors[item2.type.name] }"
+              >
+                {{ item2.type.name }}
+              </h5>
             }
           </div>
         </div>

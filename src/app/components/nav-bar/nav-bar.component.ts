@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
 })
-export class NavBarComponent {}
+export class NavBarComponent {
+  constructor(private searchService: SearchService) {}
+
+  setSearchText(text: any): void {
+    this.searchService.setSearchText(text);
+  }
+}
