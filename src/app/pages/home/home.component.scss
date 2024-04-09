@@ -12,6 +12,7 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     width: 90%;
+    min-height: 92vh;
     background-color: #ffff;
 
     .card {

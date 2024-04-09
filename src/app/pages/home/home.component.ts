@@ -4,6 +4,7 @@ import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
 import { ApiServiceService } from '../../services/api-service.service';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../../services/search.service';
+import { ColorType, color_by_types } from '../../../common/types';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +17,8 @@ export class HomeComponent {
   public pokemons: Pokemon[] = [];
   public filteredPokemons: Pokemon[] = [];
   public searcher: any;
-  public colors: [] = [];
-  private _offset: number = 0;
+  public typeSelect: string = '';
+  private _offset: number = 1;
   private _limit: number = 200;
 
   constructor(
@@ -27,7 +28,8 @@ export class HomeComponent {
 
   async ngOnInit() {
     await this.getPokemonByid();
-    this.getColorType();
+    this.getSelectedType();
+
     this.searchService.searchText$.subscribe((text) => {
       this.searcher = text;
       this.searcher = this.searcher.target?.value;
@@ -35,21 +37,38 @@ export class HomeComponent {
     });
   }
 
+  public getSelectedType() {
+    this.searchService.filterType.subscribe((res)=>{
+      this.typeSelect = res
+      this.filterByType(this.typeSelect);
+    })
+  }
+
+  public filterByType(type: string) {
+    if (type === '' || !type) {
+      // Si el tipo está vacío o no está definido, mostrar todos los Pokémon
+      this.filteredPokemons = this.pokemons;
+    } else {
+      // Filtrar los Pokémon por el tipo especificado
+      this.filteredPokemons = this.pokemons.filter((pokemon: any) => {
+        // Verificar si el tipo especificado está presente en el array de tipos del Pokémon
+        return pokemon.type.some((pokemonType: any) => pokemonType.type.name === type);
+      });
+    }
+  }
+
   public search() {
-    console.log(this.searcher);
     if (this.searcher === '' || !this.searcher) {
       this.filteredPokemons = this.pokemons;
     } else {
       this.filteredPokemons = this.pokemons.filter((f: any) =>
-        f.name?.toLowerCase().includes(this.searcher.toString().toLowerCase()),
+        f.name?.toLowerCase().includes(this.searcher.toString().toLowerCase()) || f.id.toString().includes(this.searcher.toString())
       );
     }
   }
 
-  public async getColorType() {
-    this.apiService.getColorByType().subscribe((res) => {
-      this.colors = res;
-    });
+  public getColorType(color: ColorType): string {
+    return color_by_types[color]
   }
 
   private async getPokemonByid() {
