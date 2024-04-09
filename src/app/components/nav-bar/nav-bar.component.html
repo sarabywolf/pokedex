@@ -3,6 +3,14 @@
     <img src="../../../assets/images/Pokemon-logo.png" alt="pokemonLogo">
   </div>
   <div class="container-search" >
-    <input type="text" placeholder="Search your pokemon">
+    <input type="text" (input)="setSearchText($event)" placeholder="Search your pokemon">
+  </div>
+  <div class="container-select">
+    <select [(ngModel)]="pokemonType" (change)="selectType($event)" id="pokemon-type">
+      <option value="">Select type</option>
+      @for (item of type; track $index) {
+        <option [value]="item">{{item}}</option>
+      }
+    </select>
   </div>
 </div>

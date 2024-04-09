@@ -1,4 +1,4 @@
-.container-all{
+.container-all {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -12,48 +12,52 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     width: 90%;
+    min-height: 92vh;
     background-color: #ffff;
 
-    .card{
+    .card {
       border: none;
       width: 15rem !important;
+      transition: transform 0.3s ease;
+      cursor: pointer;
 
-      .image{
+      &:hover {
+        transform: translateY(-20px);
+      }
+
+      .image {
         border-radius: 1vh;
         border: 1px solid #f2f2f2;
         background-color: #f2f2f2;
       }
-      .card-body{
-        .card-title{
+      .card-body {
+        .card-title {
           font-family: "Flexo-Demi", arial, sans-serif;
           color: #313131;
           text-transform: none;
           font-size: 145%;
           margin-bottom: 5px;
         }
-        .card-id{
+        .card-id {
           color: rgba(0, 0, 0, 0.544);
           font-size: 18px;
-          margin-top:-15px;
+          margin-top: -15px;
         }
-        .card-type{
+        .card-type {
           display: flex;
           flex-direction: row;
           justify-content: flex-start;
           align-items: center;
           text-align: center;
           gap: 30px;
-          h5{
+          h5 {
             margin-bottom: 0px;
-            padding: 10px;
+            padding: 5px 10px 5px 10px;
             border-radius: 1vh;
-            color:white;
+            color: white;
           }
         }
       }
     }
-
   }
-
 }
-
