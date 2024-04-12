@@ -31,7 +31,7 @@ export class NavBarComponent {
   }
 
   public selectType(type: any){
-    this._searchService.filterType.next(type.target.value);
+    this._searchService.searchTypeSubject.next(type.target.value);
   }
 
   setSearchText(text: any): void {
