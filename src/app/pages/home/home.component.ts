@@ -52,9 +52,7 @@ export class HomeComponent {
   }
 
   handleFilter() {
-
     if(this._search === "" && this._type === "") {this.filteredPokemons = this.pokemons; return;}
-
     let pokemonsByType: Pokemon[] = this.pokemons;
 
     if(this._type.length > 0) {

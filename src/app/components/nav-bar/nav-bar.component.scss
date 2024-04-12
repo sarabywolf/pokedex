@@ -18,17 +18,31 @@
     }
   }
   .container-search{
-    width: 90%;
+    width: 80%;
     height: 100%;
     display: flex;
     align-items: center;
     input{
       min-width: 200px;
-      width: 50%;
+      width: 70%;
       height: 70%;
       padding: 10px;
       border-radius: 1vh;
       border: none;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+  .container-select{
+    width: 20%;
+    margin-right:200px;
+    select{
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 1vh;
+      color: rgba(0, 0, 0, 0.496);
       &:focus{
         outline: none;
       }
