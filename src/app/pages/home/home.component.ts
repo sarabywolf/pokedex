@@ -92,11 +92,13 @@ export class HomeComponent {
             types: res.types,
           };
           this.pokemons.push(pokemon);
+
         });
        if(index % 20 === 0) {
         this._isCloseToEnd = false;
        }
     }
+    this.pokemons = this.pokemons.sort()
     if(!this._isCloseToEnd) {
       this._page += 1;
       this.filteredPokemons = this.pokemons;
