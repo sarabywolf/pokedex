@@ -30,7 +30,7 @@ export class HomeComponent {
   }
 
   async ngOnInit() {
-    await this.getPokemonByid();
+    await this.getPokemonById();
     const cardsContainer = document.getElementById("cards-container");
     cardsContainer!.addEventListener("scroll", this.onScrollEvent)
 
@@ -76,34 +76,34 @@ export class HomeComponent {
     return color_by_types[color]
   }
 
-  private async getPokemonByid() {
-    for (
-      let index = (this._page * 20);
-      index < this._limit;
-      index++
-    ) {
-      this.apiService
-        .getPokemoById(`pokemon/${index+1}`)
-        .subscribe(async (res) => {
-          const pokemon: Pokemon = {
-            name: res.name,
-            id: res.id,
-            image: res.sprites.front_default,
-            types: res.types,
-          };
-          this.pokemons.push(pokemon);
+  private async getPokemonById() {
+    for (let index = this._page * 20; index < this._limit; index++) {
+      const numericIndex: number = index as number; // Conversión explícita a número
 
-        });
-       if(index % 20 === 0) {
-        this._isCloseToEnd = false;
-       }
-    }
-    this.pokemons = this.pokemons.sort()
-    if(!this._isCloseToEnd) {
-      this._page += 1;
-      this.filteredPokemons = this.pokemons;
+      this.apiService.getPokemoById(`pokemon/${numericIndex + 1}`).subscribe(async (res) => {
+        const pokemon: Pokemon = {
+          name: res.name,
+          id: res.id,
+          image: res.sprites.front_default,
+          types: res.types,
+        };
+        this.pokemons.push(pokemon);
+
+        // Verificar si se está cerca del final de la lista de Pokémon
+        if (numericIndex % 20 === 0) {
+          this._isCloseToEnd = false;
+        }
+
+        // Si ya se han cargado todos los Pokémon, ordenarlos y asignarlos a la matriz filtrada
+        if (this.pokemons.length === this._limit) {
+          this.pokemons.sort((a, b) => parseInt(a.id) - parseInt(b.id)); // Conversión y ordenación por ID ascendente
+          this._page += 1;
+          this.filteredPokemons = this.pokemons;
+        }
+      });
     }
   }
+
 
   onScrollEvent =() => {
     const cardsContainer = document.getElementById("cards-container");
@@ -116,7 +116,7 @@ export class HomeComponent {
     if (closeToEnd > 0 && !this._isCloseToEnd && this._type === "" && this._search === "") {
       this._limit += 20;
       this._isCloseToEnd = true;
-      this.getPokemonByid()
+      this.getPokemonById()
     }
   }
 }
